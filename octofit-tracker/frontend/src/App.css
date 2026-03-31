@@ -1,28 +1,126 @@
 .app-shell {
   min-height: 100vh;
-  background: linear-gradient(180deg, #f8f9fa 0%, #eef3f8 100%);
+  background: linear-gradient(145deg, #ecfdf5 0%, #dbeafe 45%, #fef3c7 100%);
+  color: #0f172a;
+}
+
+.app-navbar {
+  background: linear-gradient(90deg, #0f766e 0%, #1d4ed8 100%);
+}
+
+.navbar .nav-link {
+  color: #e2e8f0;
+  font-weight: 500;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+  color: #f8fafc;
 }
 
 .navbar .nav-link.active {
+  color: #fef9c3;
   font-weight: 700;
   text-decoration: underline;
+  text-underline-offset: 0.2rem;
 }
 
 .navbar-brand {
+  color: #ffffff;
   letter-spacing: 0.03em;
 }
 
+.navbar-brand:hover,
+.navbar-brand:focus {
+  color: #e2e8f0;
+}
+
+.octofit-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.35);
+}
+
 .app-hero-card {
-  background: #ffffff;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
 }
 
 .card {
   border-radius: 0.9rem;
 }
 
+.app-heading,
+h2.h3,
+h2 {
+  color: #0f3d5e;
+}
+
+.app-body-text {
+  color: #334155;
+}
+
+.app-link,
+a.link-primary {
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+.app-link:hover,
+a.link-primary:hover {
+  color: #1e40af;
+}
+
+.btn-primary {
+  background-color: #0ea5a6;
+  border-color: #0ea5a6;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #0f766e;
+  border-color: #0f766e;
+}
+
+.btn-outline-primary {
+  color: #0f766e;
+  border-color: #0f766e;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  background-color: #0f766e;
+  border-color: #0f766e;
+}
+
+.btn-outline-dark {
+  color: #1e293b;
+  border-color: #334155;
+}
+
+.btn-outline-dark:hover,
+.btn-outline-dark:focus {
+  background-color: #1e293b;
+  border-color: #1e293b;
+}
+
 .table td,
 .table th {
   vertical-align: middle;
+}
+
+.table-dark {
+  --bs-table-bg: #0f172a;
+  --bs-table-color: #f8fafc;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  --bs-table-accent-bg: rgba(14, 165, 166, 0.09);
+}
+
+.table-hover > tbody > tr:hover > * {
+  --bs-table-accent-bg: rgba(29, 78, 216, 0.12);
 }
 
 .modal {

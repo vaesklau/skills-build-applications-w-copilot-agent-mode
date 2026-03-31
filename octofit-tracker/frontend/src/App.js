@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Activities from './components/Activities';
@@ -7,11 +8,26 @@ import Users from './components/Users';
 import Workouts from './components/Workouts';
 
 function App() {
+  const codespaceName = process.env.REACT_APP_CODESPACE_NAME;
+  const protocol = codespaceName ? 'https' : 'http';
+  const host = codespaceName
+    ? `${codespaceName}-8000.app.github.dev`
+    : 'localhost:8000';
+  const apiBaseUrl = `${protocol}://${host}/api`;
+  const logoUrl = `${process.env.PUBLIC_URL}/octofitapp-small.png`;
+
+  useEffect(() => {
+    console.log('[App] Navigation active. API base URL:', apiBaseUrl);
+  }, [apiBaseUrl]);
+
   return (
     <div className="app-shell">
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg app-navbar shadow-sm">
         <div className="container">
-          <span className="navbar-brand">OctoFit Tracker</span>
+          <NavLink className="navbar-brand d-flex align-items-center gap-2" to="/users">
+            <img src={logoUrl} alt="OctoFit logo" className="octofit-logo" />
+            <span className="fw-semibold">OctoFit Tracker</span>
+          </NavLink>
           <button
             className="navbar-toggler"
             type="button"
@@ -58,11 +74,11 @@ function App() {
       <header className="container pt-4">
         <div className="card border-0 shadow-sm app-hero-card">
           <div className="card-body p-4">
-            <h1 className="display-6 fw-bold mb-2">OctoFit Tracker Dashboard</h1>
-            <p className="text-secondary mb-0">
+            <h1 className="display-6 fw-bold mb-2 app-heading">OctoFit Tracker Dashboard</h1>
+            <p className="app-body-text mb-0">
               Review users, activities, teams, leaderboard, and workouts from the Django REST API.{' '}
               <a
-                className="link-primary"
+                className="app-link"
                 href="https://www.django-rest-framework.org/"
                 target="_blank"
                 rel="noreferrer"

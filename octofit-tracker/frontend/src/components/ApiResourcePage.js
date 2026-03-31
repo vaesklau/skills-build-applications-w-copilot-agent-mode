@@ -1,6 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-function ApiResourcePage({ title, resourcePath, emptyMessage }) {
+function ApiResourcePage({
+  title,
+  resourcePath,
+  emptyMessage,
+  endpointOverride,
+  onEndpointResolved,
+  onDataLoaded,
+}) {
   const [items, setItems] = useState([]);
   const [error, setError] = useState('');
   const [query, setQuery] = useState('');
@@ -11,10 +18,13 @@ function ApiResourcePage({ title, resourcePath, emptyMessage }) {
   const host = codespaceName
     ? `${codespaceName}-8000.app.github.dev`
     : 'localhost:8000';
-  const endpoint = `${protocol}://${host}/api/${resourcePath}/`;
+  const endpoint = endpointOverride || `${protocol}://${host}/api/${resourcePath}/`;
 
   const fetchItems = useCallback(async () => {
     console.log(`[${title}] REST API endpoint:`, endpoint);
+    if (onEndpointResolved) {
+      onEndpointResolved(endpoint);
+    }
 
     try {
       const response = await fetch(endpoint);
@@ -32,6 +42,9 @@ function ApiResourcePage({ title, resourcePath, emptyMessage }) {
           : [];
 
       console.log(`[${title}] Normalized data:`, normalizedData);
+      if (onDataLoaded) {
+        onDataLoaded(payload, normalizedData);
+      }
       setItems(normalizedData);
       setError('');
     } catch (fetchError) {
@@ -39,7 +52,7 @@ function ApiResourcePage({ title, resourcePath, emptyMessage }) {
       setError(fetchError.message);
       setItems([]);
     }
-  }, [endpoint, title]);
+  }, [endpoint, onDataLoaded, onEndpointResolved, title]);
 
   useEffect(() => {
     fetchItems();
